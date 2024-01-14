@@ -57,12 +57,19 @@ public class Entity : MonoBehaviour
     internal void Pickup(PickupInteractable pickupInteractable)
     {
         PickedObject = pickupInteractable;
+
         PickedObject.transform.SetParent(pickupParent);
+        PickedObject.transform.localEulerAngles = pickupInteractable.pickupAngleOffset;
+        PickedObject.transform.localPosition = pickupInteractable.pickupPosOffset;
+
+        PickedObject.rigidbody2D.isKinematic = true;
     }
     internal void Drop()
     {
         PickedObject.transform.SetParent(PickedObject.defaultParent);
         PickedObject = null;
+
+        PickedObject.rigidbody2D.isKinematic = false;
     }
 
     // Start is called before the first frame update
