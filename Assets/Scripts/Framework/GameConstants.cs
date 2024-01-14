@@ -16,5 +16,7 @@ public struct Const
 
         public static string PLAYER_ENTERED_RANGE = "PLAYER_ENTERED_RANGE";
         public static string PLAYER_EXITED_RANGE = "PLAYER_EXITED_RANGE";
+        public static string PLAYER_PICKED_OBJECT = "PLAYER_PICKED_OBJECT";
+        public static string PLAYER_DROPPED_OBJECT = "PLAYER_DROPPED_OBJECT";
     }
 }

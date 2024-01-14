@@ -110,7 +110,7 @@ using UnityEngine;
         }
 
         public EventParam(GameObject paramObj = null, int paramInt = 0, float paramFloat = 0f, string paramStr = "", Type paramType = null, Dictionary<string, object> paramDictionary = null,
-        Vector3[] vectorList = null, bool paramBool = false)
+        Vector3[] vectorList = null, bool paramBool = false, Entity entity = null)
         {
             this.paramObj = paramObj;
             this.paramInt = paramInt;
@@ -120,5 +120,6 @@ using UnityEngine;
             this.paramDictionary = paramDictionary;
             this.paramBool = paramBool;
             this.vectorList = vectorList;
+            this.entity = entity;
         }
     }

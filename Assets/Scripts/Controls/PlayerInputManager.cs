@@ -7,22 +7,38 @@ namespace Doga.SilentCity
 {
     public class PlayerInputManager : MonoBehaviour
     {
+        public static PlayerInputManager Instance;
 
         public Entity playerEntity;
         public float moveSpeed;  // Speed at which the character moves
         public float jumpForce;  // Amount of force added when the player jumps.
         public float limitVelocity;  // Limit the velocity of the player
 
-        private InputControls controls;
+        internal InputControls controls;
+
         private Vector3 movement;  // The direction of movement
-        private Vector3 defaultScale;
 
         void Awake()
         {
+            Instance = this;
+
             controls = new InputControls();
             controls.DefaultActionMap.Enable();
             controls.DefaultActionMap.Jump.performed += Jump_performed;
             controls.DefaultActionMap.Move.canceled += Move_canceled;
+            controls.DefaultActionMap.Interact.performed += Interact_performed;
+        }
+
+        private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            if(playerEntity.PickedObject == null)
+            {
+                playerEntity.PickupClosest();
+            }
+            else
+            {
+                playerEntity.Drop();
+            }
         }
 
         private void Move_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -41,7 +57,6 @@ namespace Doga.SilentCity
 
         private void Start()
         {
-            defaultScale = playerEntity.transform.localScale;
         }
         void Update()
         {

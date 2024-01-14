@@ -23,6 +23,7 @@ namespace Doga.SilentCity
 		public string idleText;
 		public string runText;
 		public string jumpText;
+		public string carryText;
 		public string verticalText;
 		public string horizontalText;
 
@@ -45,6 +46,13 @@ namespace Doga.SilentCity
             get
             {
 				return Mathf.Abs(entity.rb.velocity.y) > minVelocity;
+            }
+        }
+        public bool Carry
+        {
+            get
+            {
+				return entity.PickedObject != null;
             }
         }
 
@@ -100,6 +108,8 @@ namespace Doga.SilentCity
 			animator.SetBool(idleText, Idle);
 			animator.SetBool(runText, Run);
 			animator.SetBool(jumpText, Jump);
+			animator.SetBool(carryText, Carry);
+
 
 			animator.SetFloat(verticalText, entity.rb.velocity.y);
 			animator.SetFloat(horizontalText, Mathf.Abs(entity.rb.velocity.x) / entity.maxVelocity);
