@@ -24,6 +24,7 @@ namespace Doga.SilentCity
 		public string runText;
 		public string jumpText;
 		public string verticalText;
+		public string horizontalText;
 
 		public bool Idle
 		{
@@ -56,16 +57,25 @@ namespace Doga.SilentCity
 		public virtual void OnEnable()
 		{
 			EventManager.StartListening(Const.GameEvents.CREATURE_DEATH, OnDeath);
+			EventManager.StartListening(Const.GameEvents.CREATURE_JUMP, OnJump);
 		}
 		public virtual void OnDisable()
 		{
 			EventManager.StopListening(Const.GameEvents.CREATURE_DEATH, OnDeath);
-		}
+            EventManager.StopListening(Const.GameEvents.CREATURE_JUMP, OnJump);
+        }
 		void OnDeath(EventParam e)
 		{
 			if (e.paramObj.GetHashCode() == gameObject.GetHashCode())
 			{
 				animator.SetTrigger("die");
+			}
+		}
+		void OnJump(EventParam e)
+		{
+			if (e.paramObj.GetHashCode() == gameObject.GetHashCode())
+			{
+				animator.SetTrigger("jump_trigger");
 			}
 		}
 
@@ -92,6 +102,7 @@ namespace Doga.SilentCity
 			animator.SetBool(jumpText, Jump);
 
 			animator.SetFloat(verticalText, entity.rb.velocity.y);
+			animator.SetFloat(horizontalText, Mathf.Abs(entity.rb.velocity.x) / entity.maxVelocity);
 		}
 
 		void SetBlendValues()

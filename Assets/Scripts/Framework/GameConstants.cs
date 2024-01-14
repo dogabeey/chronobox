@@ -6,6 +6,7 @@ public struct Const
     {
         public static string ENTITY_MOVED = "ENTITY_MOVED";
         public static string CREATURE_DEATH = "CREATURE_DEATH";
+        public static string CREATURE_JUMP = "CREATURE_JUMP";
         public static string COLLECTIBLE_EARNED = "COLLECTIBLE_EARNED";
         public static string OBJECTIVE_COMPLETED = "OBJECTIVE_COMPLETED";
         public static string OBJECTIVE_FAILED = "OBJECTIVE_FAILED";

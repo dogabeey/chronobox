@@ -15,6 +15,7 @@ namespace Doga.SilentCity
 
         private InputControls controls;
         private Vector3 movement;  // The direction of movement
+        private Vector3 defaultScale;
 
         void Awake()
         {
@@ -38,6 +39,10 @@ namespace Doga.SilentCity
             }
         }
 
+        private void Start()
+        {
+            defaultScale = playerEntity.transform.localScale;
+        }
         void Update()
         {
             Vector2 axisVector = controls.DefaultActionMap.Move.ReadValue<Vector2>();
@@ -47,7 +52,7 @@ namespace Doga.SilentCity
             movement.Set(horizontal, 0f, 0f);
 
             // Normalise the movement vector and make it proportional to the speed per second.
-            movement = movement.normalized * moveSpeed * Time.deltaTime * 120;
+            movement = movement.normalized * moveSpeed * Time.deltaTime * 120 * playerEntity.MoveSpeed;
 
             // Move the player to it's current position plus the movement.
             playerEntity.rb.AddForce(movement);
@@ -56,7 +61,7 @@ namespace Doga.SilentCity
             if (movement.magnitude > 0.01f)
             {
                 playerEntity.state = Entity.EntityState.Run;
-                playerEntity.transform.localScale = new Vector3(movement.x > 0 ? 1 : -1, 1f, 1f);
+                playerEntity.transform.localEulerAngles = new Vector3(0, 90 * (movement.x > 0 ? 1 : -1), 0);
             }
             else
             {
@@ -68,13 +73,13 @@ namespace Doga.SilentCity
 
         private void LimitVelocity()
         {
-            if (playerEntity.rb.velocity.x > limitVelocity)
+            if (playerEntity.rb.velocity.x > playerEntity.maxVelocity)
             {
-                playerEntity.rb.velocity = new Vector2(limitVelocity, playerEntity.rb.velocity.y);
+                playerEntity.rb.velocity = new Vector2(playerEntity.maxVelocity, playerEntity.rb.velocity.y);
             }
             if (playerEntity.rb.velocity.x < -limitVelocity)
             {
-                playerEntity.rb.velocity = new Vector2(-limitVelocity, playerEntity.rb.velocity.y);
+                playerEntity.rb.velocity = new Vector2(-playerEntity.maxVelocity, playerEntity.rb.velocity.y);
             }
         }
 
@@ -82,7 +87,8 @@ namespace Doga.SilentCity
         public void Jump()
         {
             // Add a vertical force to the player.
-            playerEntity.rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            playerEntity.rb.AddForce(new Vector2(0f, jumpForce * playerEntity.jumpForceMultiplier), ForceMode2D.Impulse);
+            EventManager.TriggerEvent(Const.GameEvents.CREATURE_JUMP, new EventParam(paramObj: playerEntity.gameObject));
         }
     }
 }

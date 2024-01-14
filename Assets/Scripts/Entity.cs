@@ -14,12 +14,16 @@ public class Entity : MonoBehaviour
     }
 
     public Transform pickupParent;
+    public float moveSpeedMultiplier = 1;
+    public float jumpForceMultiplier = 1;
+    public float maxVelocity = 7;
 
     internal Rigidbody2D rb;
     internal Collider2D cd;
+    internal EntityState state;
 
     private PickupInteractable pickedObject;
-    internal EntityState state;
+    private float defaultMass;
 
     public PickupInteractable PickedObject
     {
@@ -29,7 +33,24 @@ public class Entity : MonoBehaviour
         }
         set
         {
-            PickedObject = value;
+            pickedObject = value;
+            if(value)
+            {
+                rb.mass = defaultMass + pickedObject.rigidbody2D.mass;
+            }
+            else
+            {
+                rb.mass = defaultMass;
+            }
+        }
+    }
+    public float MoveSpeed
+    {
+        get
+        {
+            float finalMoveSpeed = moveSpeedMultiplier;
+
+            return finalMoveSpeed;
         }
     }
 
@@ -49,6 +70,8 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<Collider2D>();
+
+        defaultMass = rb.mass;
     }
 
     // Update is called once per frame

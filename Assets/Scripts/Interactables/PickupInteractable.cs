@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PickupInteractable : InteractableObject
 {
+    public Vector3 pickupPosOffset;
+    public Vector3 pickupAngleOffset;
+
     internal new Collider2D collider2D;
     internal new Rigidbody2D rigidbody2D;
     internal Transform defaultParent;
