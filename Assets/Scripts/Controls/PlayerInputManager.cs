@@ -49,7 +49,7 @@ namespace Doga.SilentCity
         private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
 
-            if (playerEntity.rb.velocity.y == 0)
+            if (playerEntity.rb.velocity.y == 0 && !playerEntity.PickedObject)
             {
                 Jump();
             }
@@ -102,6 +102,7 @@ namespace Doga.SilentCity
         public void Jump()
         {
             // Add a vertical force to the player.
+
             playerEntity.rb.AddForce(new Vector2(0f, jumpForce * playerEntity.jumpForceMultiplier), ForceMode2D.Impulse);
             EventManager.TriggerEvent(Const.GameEvents.CREATURE_JUMP, new EventParam(paramObj: playerEntity.gameObject));
         }

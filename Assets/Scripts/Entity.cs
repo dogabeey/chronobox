@@ -37,14 +37,6 @@ public class Entity : MonoBehaviour
         set
         {
             pickedObject = value;
-            if(value)
-            {
-                rb.mass = defaultMass + pickedObject.rigidbody2D.mass;
-            }
-            else
-            {
-                rb.mass = defaultMass;
-            }
         }
     }
     public float MoveSpeed
