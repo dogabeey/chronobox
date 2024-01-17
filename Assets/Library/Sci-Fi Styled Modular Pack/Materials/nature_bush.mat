@@ -27,7 +27,7 @@ Material:
   m_InvalidKeywords:
   - _ALPHATEST_ON
   m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -110,9 +110,9 @@ Material:
     - _Cutoff: 0.45
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Glossiness: 1
+    - _Glossiness: 0.076
     - _HueVariationKwToggle: 0
-    - _Metallic: 0
+    - _Metallic: 0.14
     - _Mode: 1
     - _NormalMapKwToggle: 0
     - _Occlusion: 3.3
@@ -125,7 +125,7 @@ Material:
     - _SubsurfaceIndirect: 0.25
     - _SubsurfaceKwToggle: 0
     - _TranslucencyViewDependency: 0.073
-    - _TwoSided: 2
+    - _TwoSided: 0
     - _UVSec: 0
     - _WindQuality: 0
     - _ZWrite: 1
@@ -133,7 +133,7 @@ Material:
     - _Color: {r: 0.69449496, g: 0.8161765, b: 0.63613755, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
-    - _HueVariationColor: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _HueVariationColor: {r: 0, g: 1, b: 0.48655844, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TranslucencyColor: {r: 0.61810195, g: 0.8897059, b: 0.431769, a: 1}
